@@ -15,12 +15,12 @@ namespace TadosDevSchool2018.Models.Task3
             this.Author = author;
         }
 
-        public static ItemList<T> HelperGenerateItemList<T>(uint max, List<Author> authors)
+        public static ItemList<T> _GenerateItemList<T>(uint max, List<Author> authors)
             where T : Item, new()
         {
+            var rand = new Random();
             Func<List<Author>, Author> randomAuthor = (_authors) =>
             {
-                var rand = new Random();
                 var i = rand.Next(_authors.Count);
                 return _authors[i];
             };

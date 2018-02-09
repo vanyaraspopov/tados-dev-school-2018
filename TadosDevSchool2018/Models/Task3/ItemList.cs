@@ -102,8 +102,9 @@ namespace TadosDevSchool2018.Models.Task3
             var list = new List<T>();
             foreach (var item in items)
             {
+                if (item == null) continue;
                 var authorName = item.Author.Name;
-                if (authorName.Length > 0 && authorName[0] == letter)
+                if (authorName.Length > 0 && char.ToLower(authorName[0]) == letter)
                 {
                     list.Add(item);
                 }

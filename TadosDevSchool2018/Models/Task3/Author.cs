@@ -14,12 +14,12 @@ namespace TadosDevSchool2018.Models.Task3
             Name = name;
         }
 
-        public static List<Author> HelperGenerateAuthors()
+        public static List<Author> _GenerateAuthors()
         {
             var names = new[] {
-                "Alpha1", "Bravo1", "Charlie1", "Delta1", "Echo1",
-                "Alpha2", "Bravo2", "Charlie2", "Delta2", "Echo2",
-                          "Bravo3", "Charlie3"
+                "A1", "B1", "C1", "D1", "E1", "X1", "Y1", "Z1",
+                "A2", "B2", "C2", "D2", "E2", "X2", "Y2", "Z2",
+                "A3", "B3", "C3", "D3", "E3", "X3", "Y3", "Z3"
             };
             var authors = new List<Author>();
             foreach (var name in names)

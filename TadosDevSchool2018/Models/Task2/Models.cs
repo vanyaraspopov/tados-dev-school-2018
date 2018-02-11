@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Dapper;
-
 namespace TadosDevSchool2018.Models.Task2
 {
     public class Category : PassiveRecord<Category>

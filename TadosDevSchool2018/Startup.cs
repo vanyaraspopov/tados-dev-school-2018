@@ -14,6 +14,9 @@ namespace TadosDevSchool2018
 {
     public class Startup
     {
+        //  Не знаю куда ещё это воткнуть
+        public static string DbConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=task2;Integrated Security=True;Connect Timeout=30;";
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -32,8 +35,8 @@ namespace TadosDevSchool2018
             // Add framework services.
             services.AddMvc();
 
-            var connection = @"Server=(localdb)\mysqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;ConnectRetryCount=0";
-            services.AddDbContext<ModelsContext>(options => options.UseMySQL(connection));
+            var connection = DbConnectionString;
+            services.AddDbContext<ModelsContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

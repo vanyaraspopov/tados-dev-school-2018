@@ -11,7 +11,7 @@ using TadosDevSchool2018.Models.Task2;
 namespace TadosDevSchool2018.Migrations
 {
     [DbContext(typeof(ModelsContext))]
-    [Migration("20180211104013_InitialMigration")]
+    [Migration("20180211111941_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,8 @@ namespace TadosDevSchool2018.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("CategoryVars");
                 });
 
@@ -59,6 +61,10 @@ namespace TadosDevSchool2018.Migrations
                     b.Property<string>("Value");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("ContentId");
 
                     b.ToTable("CategoryVarsValues");
                 });
@@ -76,6 +82,10 @@ namespace TadosDevSchool2018.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Contents");
                 });
 
@@ -92,6 +102,10 @@ namespace TadosDevSchool2018.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ContentId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("ContentRates");
                 });
 
@@ -107,6 +121,53 @@ namespace TadosDevSchool2018.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TadosDevSchool2018.Models.Task2.CategoryVar", b =>
+                {
+                    b.HasOne("TadosDevSchool2018.Models.Task2.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TadosDevSchool2018.Models.Task2.CategoryVarValue", b =>
+                {
+                    b.HasOne("TadosDevSchool2018.Models.Task2.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TadosDevSchool2018.Models.Task2.Content", "Content")
+                        .WithMany()
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TadosDevSchool2018.Models.Task2.Content", b =>
+                {
+                    b.HasOne("TadosDevSchool2018.Models.Task2.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TadosDevSchool2018.Models.Task2.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("TadosDevSchool2018.Models.Task2.ContentRate", b =>
+                {
+                    b.HasOne("TadosDevSchool2018.Models.Task2.Content", "Content")
+                        .WithMany()
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TadosDevSchool2018.Models.Task2.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
